@@ -1,5 +1,7 @@
 # Production and SEO audit — October 26, 2026
 
+Historical SEO results from before the subsequent content-curation task. Current project selection, publication evidence, and validation limits are in [the content audit](content-audit.md). The old repository inventory was removed; its names and metadata are no longer retained in this report.
+
 ## Result and scope
 
 Implemented directly in the existing static portfolio. No framework migration, runtime dependency, deployment, push, DNS update, account change, or Google submission was performed. Vercel was identified by the already-open project domain dashboard, not assumed from the GitHub remote. The preferred origin in all new source is `https://sumit-kushwaha.dev`.
@@ -22,7 +24,7 @@ Implemented directly in the existing static portfolio. No framework migration, r
 | Unknown routes had no branded missing-page artifact | Custom `404.html`, noindex, no misleading homepage fallback |
 | Deploying the entire repository could expose non-public source files | Explicit public-only `dist/` build; Vercel output points there |
 | Cache invalidation and host configuration undocumented | Content-versioned CSS/JS URLs, revalidation/short asset cache, Vercel configuration and release instructions |
-| E-Commerce demo returns 404; nine archive URLs return 404 | Preserve projects, label demo unavailable, route unavailable sources to named GitHub-profile searches; no invented replacement URL |
+| Repository inventory and old demo destinations | Superseded by strict six-project curation; no inventory, profile searches, count, or dead demo link remains |
 
 The source already had correct language/encoding/viewport, useful semantic sections, a favicon, a valid PDF resume, verified social/email references, reduced-motion support, no external font requests, and lightweight CSS/SVG illustrations. Those features were preserved and extended.
 
@@ -68,14 +70,9 @@ Raw local reports, when still present in this session: `/tmp/portfolio-mobile-fi
 
 ## Public link and infrastructure observations
 
-Read-only public HTTP GET checks were performed. [Validation results](validation-results.json) record each URL/status.
+The current content audit validates only the explicitly selected repositories and profile/publication links. Previous inventory metadata has been removed from the persisted results. GitHub discovery and all-repository API calls are not part of the build or runtime.
 
-- GitHub profile and the three flagship source repository pages returned 200. The AI root README lookup returned 404 because there is no README at that path; the repository itself is public and its source was accessible.
-- E-Commerce’s former Vercel demo returned 404.
-- These archive repository URLs returned 404: AegisAiBank, DSAA_CP, DSAA_Project, E-Commerce_Order_Management, MyTasks, Smart_Campus_Facility, StudentClassifier, TaskManager, and WorkSpace. That is **nine** unavailable repository URLs; the demo makes ten unavailable destinations. All archive entries were retained, with explicit source availability notes and GitHub-profile searches instead of those dead direct destinations.
-- LinkedIn returned 999 and LeetCode returned Cloudflare 403 to the automated request. These are not classified as broken profiles; the user-verified profile URLs are retained. Their logged-in/manual browser accessibility still needs confirmation.
-- Vercel’s dashboard showed apex → `www` using 308, `www` → Production, and the stable Vercel alias → Production. No remote setting was changed.
-- The audit machine’s public request followed the apex redirect and failed to resolve `www`. HTTPS requests use certificate verification, but the complete `www` TLS/redirect path could not be verified from this machine. No successful post-change live cover, sitemap, or indexing check is claimed.
+At the previous hosting inspection, Vercel showed apex → `www` using 308 while `www` served Production. That remote state was not changed or rechecked during content curation. Follow the README’s manual domain-verification steps before making any hosting change. No deployment, DNS change, or indexing success is claimed.
 
 ## Remaining work, ordered by impact
 
@@ -83,7 +80,7 @@ Read-only public HTTP GET checks were performed. [Validation results](validation
 2. **Deploy the reviewed build to the existing Vercel project.** Verify the actual output root, response codes, duplicate-origin/index-file redirects, and public sitemap/robots/PDF/PNG. Prevent accidental preview indexing using Vercel Preview Deployment Protection.
 3. **Complete Search Console ownership and indexing checks.** Use the real DNS TXT token, submit the sitemap, inspect all four pages, and confirm Google-selected canonicals. No ranking or indexing outcome is guaranteed.
 4. **Finish browser/live validation.** Repeat mobile/desktop Lighthouse after the two final accessibility edits; check tablet widths, reduced-motion behavior, project-page layouts, browser downloads, social caches, and the hosted schema validator. Measure field Core Web Vitals once traffic supplies data.
-5. **Restore public evidence where appropriate.** Publish or correct renamed/private source URLs and restore a verified demo. Keep the official apex portfolio linked consistently in GitHub, LinkedIn, and LeetCode profiles through manual profile edits; no external profile was changed.
-6. **Maintain factual content.** Refresh the repository snapshot, resume, project details, and expected-graduation wording as real changes occur. Add no unsupported metrics, credentials, or thin pages.
+5. **Restore public evidence where appropriate.** Add a deployment URL only after it is verified for an approved project. Keep the official apex portfolio linked consistently in GitHub, LinkedIn, and LeetCode profiles through manual profile edits; no external profile was changed.
+6. **Maintain factual content.** Refresh the curated selection, resume, project details, and expected-graduation wording as real changes occur. Add no unsupported metrics, credentials, or thin pages.
 
 Exact deployment, Name.com DNS/HTTPS, Search Console steps, and the release checklist are in [README](../README.md).

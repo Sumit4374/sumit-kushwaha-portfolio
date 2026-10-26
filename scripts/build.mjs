@@ -1,23 +1,21 @@
 /** Build a public-only static directory with no third-party dependencies. */
-import { cp, mkdir, readdir, readFile, rm, writeFile } from 'node:fs/promises';
+import { cp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import { createHash } from 'node:crypto';
+import { assertApprovedLinks, loadContent, renderHomepage } from './content.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const origin = 'https://sumit-kushwaha.dev';
-const pages = ['index.html'];
-async function collect(directory) {
-  for (const item of await readdir(path.join(root, directory), { withFileTypes: true })) {
-    const relative = path.posix.join(directory, item.name);
-    if (item.isDirectory()) await collect(relative);
-    else if (item.name === 'index.html') pages.push(relative);
-  }
-}
-await collect('projects');
+const content = await loadContent();
+// Only explicitly selected project pages are eligible for publication.
+const pages = ['index.html', ...content.featuredProjects.filter(project => project.detailPath).map(project => project.detailPath.slice(1) + 'index.html')];
+const homepage = renderHomepage(await readFile(path.join(root, 'index.html'), 'utf8'), content);
+await writeFile(path.join(root, 'index.html'), homepage);
 const locations = [];
 for (const page of pages.sort()) {
   const html = await readFile(path.join(root, page), 'utf8');
+  assertApprovedLinks(html, content);
   if (/<meta\b[^>]*name="robots"[^>]*content="[^"]*noindex/i.test(html)) continue;
   const url = origin + '/' + page.replace(/index\.html$/, '');
   const canonicals = [...html.matchAll(/<link\b[^>]*rel="canonical"[^>]*href="([^"]+)"/g)];
@@ -33,9 +31,15 @@ await writeFile(path.join(root, 'sitemap.xml'), sitemap);
 const output = path.join(root, 'dist');
 await rm(output, { recursive: true, force: true });
 await mkdir(output);
-for (const item of ['index.html', '404.html', 'styles.css', 'script.js', 'assets', 'projects', 'sitemap.xml', 'robots.txt']) {
+for (const item of ['index.html', '404.html', 'styles.css', 'script.js', 'assets', 'sitemap.xml', 'robots.txt']) {
   await cp(path.join(root, item), path.join(output, item), { recursive: true });
 }
+for (const page of pages.filter(page => page !== 'index.html')) {
+  const target = path.join(output, page);
+  await mkdir(path.dirname(target), { recursive: true });
+  await cp(path.join(root, page), target);
+}
+assertApprovedLinks(await readFile(path.join(root, 'script.js'), 'utf8'), content);
 // Content-versioned queries invalidate browser/CDN caches when CSS or JS changes.
 const versions = {};
 for (const asset of ['styles.css', 'script.js']) {

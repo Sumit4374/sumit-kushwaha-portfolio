@@ -106,7 +106,7 @@ for page in pages + [ROOT / '404.html']:
     if relative == 'index.html':
         person = next(n for n in graph if n['@type'] == 'Person')
         assert person['name'] == 'Sumit Kushwaha' and person['url'] == ORIGIN + '/'
-        assert person['jobTitle'] == 'Software Developer' and set(person['sameAs']) == PROFILES
+        assert person['jobTitle'] == 'Java / Spring Boot Backend Developer' and set(person['sameAs']) == PROFILES
         assert next(n for n in graph if n['@type'] == 'WebSite')['publisher']['@id'] == person['@id']
         for profile in PROFILES: assert doc.find('a', href=profile), profile
         assert 'Concurrent Message Broker' in page.read_text()
@@ -129,7 +129,7 @@ for path in ['/', '/styles.css', '/script.js', '/assets/og-cover.png', *[url.rem
 png = (ROOT / 'assets/og-cover.png').read_bytes()
 assert png[:8] == b'\x89PNG\r\n\x1a\n' and struct.unpack('>II', png[16:24]) == (1200, 630)
 assert (ROOT / 'assets/Sumit_Kushwaha_Resume.pdf').read_bytes().startswith(b'%PDF-')
-assert not any((ROOT / path).exists() for path in ['.git', '.codex', 'README.md', 'scripts', 'docs', 'vercel.json'])
+assert not any((ROOT / path).exists() for path in ['.git', '.codex', 'README.md', 'scripts', 'docs', 'vercel.json', 'portfolio.content.json'])
 print(f'PASS: {len(pages)} canonical pages, headings, metadata, local links/fragments, JSON-LD identity references, robots, sitemap, social image, resume, and public-only output.')
 if args.url:
     base = args.url.rstrip('/')

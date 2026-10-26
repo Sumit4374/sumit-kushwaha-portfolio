@@ -1,0 +1,190 @@
+{
+  "professional": {
+    "name": "Sumit Kushwaha",
+    "domain": "https://sumit-kushwaha.dev",
+    "primaryRole": "Java / Spring Boot Backend Developer",
+    "specialization": "Distributed Systems | AI Engineering",
+    "expertise": [
+      "Java",
+      "Spring Boot",
+      "Distributed Systems",
+      "Concurrency",
+      "System Design",
+      "Redis",
+      "AI Engineering"
+    ],
+    "location": "Pune, Maharashtra, India",
+    "education": {
+      "institution": "Vishwakarma Institute of Technology",
+      "city": "Pune",
+      "expectedGraduation": "June 2028"
+    },
+    "email": "kusumit437@gmail.com",
+    "resume": "/assets/Sumit_Kushwaha_Resume.pdf",
+    "social": {
+      "github": "https://github.com/Sumit4374",
+      "linkedin": "https://www.linkedin.com/in/sumit-kushwaha-a97238331",
+      "leetcode": "https://leetcode.com/u/SumitKush1323/"
+    }
+  },
+  "seo": {
+    "title": "Sumit Kushwaha | Java Backend Developer & Distributed Systems Engineer",
+    "description": "Official portfolio of Sumit Kushwaha, a Java and Spring Boot backend developer specializing in distributed systems, concurrent programming, and AI engineering. Explore projects, experience, and research.",
+    "socialTitle": "Sumit Kushwaha | Backend Developer",
+    "socialDescription": "Java, Spring Boot, Distributed Systems & AI Engineering"
+  },
+  "approvedRepositories": [
+    "Concurrent-Message-Broker",
+    "FlashScale",
+    "AI-Engineering-Agent-Platform",
+    "SecureNet-and-NIDS",
+    "GetSocial--MicroServices-",
+    "E-Commerce"
+  ],
+  "featuredProjects": [
+    {
+      "id": "ai-engineering-agent-platform",
+      "repository": "AI-Engineering-Agent-Platform",
+      "title": "AI Engineering Agent Platform",
+      "titleLines": [
+        "AI Engineering",
+        "Agent Platform"
+      ],
+      "eyebrow": "AGENTIC SYSTEMS · RAG · MCP",
+      "description": "A Spring Boot and Spring AI platform for LLM orchestration, RAG, MCP tools, JWT security, PostgreSQL/pgvector, Kafka and SSE streaming, with automated tests and observability.",
+      "highlights": [
+        "JWT & GUARDRAILS",
+        "PGVECTOR",
+        "KAFKA + SSE",
+        "169+ TESTS"
+      ],
+      "detailPath": "/projects/ai-engineering-agent-platform/"
+    },
+    {
+      "id": "flashscale",
+      "repository": "FlashScale",
+      "title": "FlashScale",
+      "eyebrow": "JAVA / SPRING BOOT / REDIS",
+      "description": "A Spring Boot cache-aside service over PostgreSQL, with Redis stampede locks, shared API rate limiting, Nginx load balancing, and Prometheus/Grafana observability.",
+      "highlights": [
+        "REDIS LOCKS",
+        "RATE LIMITING",
+        "PROMETHEUS"
+      ],
+      "detailPath": "/projects/flashscale/"
+    },
+    {
+      "id": "concurrent-message-broker",
+      "repository": "Concurrent-Message-Broker",
+      "title": "Concurrent Message Broker",
+      "eyebrow": "JAVA / TCP / MULTITHREADING",
+      "description": "A Kafka-inspired Java broker with producers and consumers, topics and partitions, partition-local ordering, TCP, bounded concurrency, backpressure, append-only recovery, and offset-based replay.",
+      "highlights": [
+        "FILECHANNEL",
+        "CRC32",
+        "ASYNC APIS"
+      ],
+      "detailPath": "/projects/concurrent-message-broker/"
+    }
+  ],
+  "secondaryProjects": [
+    {
+      "id": "securenet-nids",
+      "repository": "SecureNet-and-NIDS",
+      "title": "SecureNet NIDS",
+      "category": "04 / SECURITY + ML",
+      "description": "Hybrid intrusion detection combining an autoencoder and XGBoost with a FastAPI inference service and monitoring dashboard.",
+      "technologies": "PYTHON · FASTAPI · XGBOOST",
+      "deploymentUrl": null,
+      "deploymentVerified": false
+    },
+    {
+      "id": "getsocial-microservices",
+      "repository": "GetSocial--MicroServices-",
+      "title": "GetSocial Microservices",
+      "category": "05 / MICROSERVICES",
+      "description": "A Spring Boot social platform with an API gateway, Eureka discovery, PostgreSQL, and Kafka events for independently organized services.",
+      "technologies": "JAVA · KAFKA · POSTGRESQL",
+      "deploymentUrl": null,
+      "deploymentVerified": false
+    },
+    {
+      "id": "e-commerce",
+      "repository": "E-Commerce",
+      "title": "E-Commerce",
+      "category": "06 / PRODUCT CATALOG API",
+      "description": "A Node.js and Express product catalog using PostgreSQL/Prisma, cursor-based pagination, category filters, JWT authentication, and validation.",
+      "technologies": "NODE.JS · PRISMA · POSTGRESQL",
+      "footer": "CURSOR PAGINATION + JWT",
+      "deploymentUrl": null,
+      "deploymentVerified": false
+    }
+  ],
+  "engineeringHighlight": {
+    "value": "I/O",
+    "suffix": "↗",
+    "lines": [
+      "DURABLE LOGS",
+      "CRASH RECOVERY"
+    ]
+  },
+  "research": [
+    {
+      "id": "esp32-monitoring",
+      "label": "01 / CONFERENCE",
+      "title": "ESP32-Based Smart Environmental Monitoring System with Dual Display",
+      "conference": "IEEE CCGE",
+      "year": 2026,
+      "status": "Presented",
+      "researchArea": "ESP32-based environmental sensing",
+      "url": "https://doi.org/10.1109/ccge67142.2026.11581900",
+      "urlVerified": true,
+      "doi": "10.1109/ccge67142.2026.11581900",
+      "verification": {
+        "source": "https://api.crossref.org/works/10.1109/CCGE67142.2026.11581900",
+        "titleMatched": true,
+        "authorMatched": "Sumit Kushwaha",
+        "publisher": "IEEE",
+        "recordType": "proceedings-article",
+        "publisherUrl": "https://ieeexplore.ieee.org/document/11581900/",
+        "verifiedOn": "2026-10-26"
+      }
+    },
+    {
+      "id": "healthub",
+      "label": "02 / RESEARCH",
+      "title": "HealtHub",
+      "conference": "AIHW",
+      "year": 2025,
+      "status": "Co-authored and presented",
+      "researchArea": null,
+      "url": null,
+      "urlVerified": false,
+      "doi": null
+    }
+  ],
+  "patents": {
+    "count": 2,
+    "status": "Applications filed",
+    "researchAreas": [
+      "IoT",
+      "machine learning"
+    ],
+    "applications": [
+      {
+        "title": null,
+        "applicationNumber": null,
+        "filingDate": null,
+        "url": null,
+        "urlVerified": false
+      },
+      {
+        "title": null,
+        "applicationNumber": null,
+        "filingDate": null,
+        "url": null,
+        "urlVerified": false
+      }
+    ]
+  }
+}

@@ -1,6 +1,6 @@
 # Sumit Kushwaha — Engineering Portfolio
 
-Static HTML, CSS, and JavaScript portfolio for **Sumit Kushwaha**, Java Backend Developer | Distributed Systems | AI Engineering. Official origin: **https://sumit-kushwaha.dev**. The existing design, CSS architecture illustrations, six project cards, animations, repository search/filter, and contact actions are retained.
+Static HTML, CSS, and JavaScript portfolio for **Sumit Kushwaha**, Java Backend Developer | Distributed Systems | AI Engineering. Official origin: **https://sumit-kushwaha.dev**. The existing design, CSS architecture illustrations, six curated project cards, animations, and contact actions are retained. The all-repository inventory has been removed.
 
 ## Build, preview, and validate
 
@@ -9,6 +9,7 @@ Node.js and Python 3 are the only local tools required. No package installation 
 ```bash
 node scripts/build.mjs
 python3 scripts/check.py
+node --test scripts/content.test.mjs
 node --check script.js
 python3 scripts/serve.py --port 8001
 ```
@@ -30,7 +31,10 @@ The build creates **`dist/`**, generates `sitemap.xml` from canonical `index.htm
 | --- | --- |
 | `index.html` | Homepage, verified identity, experience, education, project cards, single H1, social metadata, Person/WebSite JSON-LD |
 | `styles.css` | Existing visual theme plus identity heading, static project notes, accessibility refinements |
-| `script.js` | 24-entry repository snapshot, search/filter, menu, clipboard, animation controls |
+| `portfolio.content.json` | Single build-time source for identity, six approved repositories, card content, research, patents, and contact links; never shipped to the browser |
+| `scripts/content.mjs` | Validates the allowlist and fills marked static content slots without changing card shells or diagrams |
+| `scripts/content.test.mjs` | Regression tests for strict curation, unverified-link suppression, contact data, and public-output boundaries |
+| `script.js` | Existing menu, clipboard, and animation controls; no repository inventory or GitHub requests |
 | `projects/concurrent-message-broker/index.html` | Ordering, persistence, recovery, backpressure, TCP, and limitations |
 | `projects/flashscale/index.html` | Cache-aside flow, Redis ownership locks, shared rate limits, observability, and trade-offs |
 | `projects/ai-engineering-agent-platform/index.html` | Ingestion, RAG retrieval, agents, security, events/streaming, and testing scope |
@@ -44,13 +48,20 @@ The build creates **`dist/`**, generates `sitemap.xml` from canonical `index.htm
 | `scripts/check.py` | Static and optional HTTP regression checks |
 | `scripts/validate_schema.py` | Optional network-backed Schema.org vocabulary checks |
 | `scripts/serve.py` | Local production-output preview |
-| `docs/seo-audit.md` | Audit findings, validation evidence, limitations, and remaining work |
+| `docs/seo-audit.md` | Historical SEO audit and remaining deployment work |
+| `docs/content-audit.md` | Current content curation, evidence, verification limits, and missing information |
 
-To add a page, create a real static `index.html` under `projects/<slug>/`, give it one self-referencing canonical, unique title/description, useful content, and a standard homepage link. Rebuild and run the checks. The sitemap automatically includes canonical project pages and excludes `noindex` pages. It deliberately has no speculative `lastmod` dates. Only add dates if backed by actual page modification history.
+## Edit approved content
 
-Project claims use the supplied resume and inspected public repository source. **Concurrent Message Broker** is the public project title throughout. The AI platform’s 169+ tests are resume-reported, not a suite executed during the portfolio audit. No throughput benchmarks or production adoption figures were added.
+Edit **`portfolio.content.json`**, then run `node scripts/build.mjs`. The build synchronizes marked regions in the checked-in homepage and emits complete static HTML. No browser-side fetch or hydration is needed. Keep the marker comments intact; their card shells and SVG/CSS illustrations remain hand-authored. To synchronize the homepage without packaging, run `node scripts/content.mjs --write`.
 
-The archive preserves all 24 existing entries. Repositories returning 404 during the October 26, 2026 audit are marked unavailable and link to a named search on the GitHub profile; this does not establish whether they were deleted, renamed, or made private. Restore the direct repository link by removing `available: false` after confirming the public URL. The unavailable E-Commerce demo is labeled as such; restore its link only after a working deployment is verified.
+The configuration requires exactly three featured and three secondary projects, six unique repositories, and membership in `approvedRepositories`. All other repositories are excluded by default. Adding a repository to GitHub, a file under `projects/`, or an unrelated source entry cannot make it visible. Only configured flagship detail pages are copied into `dist/` and included in the canonical sitemap. A deliberate selection change requires editing the allowlist, the selected project, and its existing HTML slot together.
+
+The previous inventory, count badge, archive search/filter, unavailable-source profile searches, and dead demo notice are removed. The replacement metric describes the broker’s durable I/O and crash recovery; the existing resume-backed automated-test and filed-application accomplishments remain.
+
+Research uses exact configured titles. A paper or patent link renders only with an HTTPS URL **and** `urlVerified: true`; unverified placeholder URLs never enter public HTML. No deployment link renders without `deploymentVerified: true`. Do not set those flags without checking the actual record or deployment. Patent titles, application numbers, dates, and URLs remain null until confirmed public. No patent grant is claimed.
+
+Project claims use the supplied resume and inspected public source. **Concurrent Message Broker** is the public title throughout. The AI platform’s 169+ tests are resume-reported, not a suite executed during this portfolio update. No throughput benchmarks or production adoption figures were added. See [the content audit](docs/content-audit.md) for sources and the verified ESP32 paper DOI.
 
 ## Deploy to the detected Vercel project — manual action
 
@@ -68,7 +79,7 @@ See [Vercel project configuration](https://vercel.com/docs/project-configuration
 
 ## Correct the canonical domain, DNS, and HTTPS — manual action
 
-**Highest-priority finding:** the inspected dashboard currently has `sumit-kushwaha.dev` permanently redirecting **to `www.sumit-kushwaha.dev`**, while `www` serves Production. This is opposite the required canonical origin. An apex HTTP request also followed that redirect and failed to resolve `www` from the audit machine. This is an observed resolver failure, not proof of a global outage.
+**Finding from the previous SEO audit (recheck before changing hosting):** the inspected dashboard had `sumit-kushwaha.dev` permanently redirecting **to `www.sumit-kushwaha.dev`**, while `www` serves Production. This is opposite the required canonical origin. An apex HTTP request also followed that redirect and failed to resolve `www` from the audit machine. This is an observed resolver failure, not proof of a global outage.
 
 Use [the project’s Domains settings](https://vercel.com/sumit4374s-projects/sumit-kushwaha-portfolio/settings/domains):
 
@@ -116,7 +127,7 @@ Google references: [add a Search Console property](https://support.google.com/we
 
 ## Performance and accessibility
 
-The site uses no external fonts, analytics, or runtime dependencies. Critical hero content and project notes are static HTML; there are no raster images on the rendered homepage to lazy-load. CSS diagrams retain their visuals, and icon SVGs are hidden from assistive technology. Content stays visible if the main script fails. Reduced-motion preferences disable animations and transitions; a pause/resume control also stops continuous motion. Search/filter controls, focus indicators, skip links, and Escape focus restoration are retained or improved.
+The site uses no external fonts, analytics, or runtime dependencies. Critical hero content and project notes are static HTML; there are no raster images on the rendered homepage to lazy-load. CSS diagrams retain their visuals, and icon SVGs are hidden from assistive technology. Content stays visible if the main script fails. Reduced-motion preferences disable animations and transitions; a pause/resume control also stops continuous motion. Focus indicators, skip links, mobile navigation, and Escape focus restoration are retained. The obsolete repository-inventory controls were intentionally removed.
 
 Vercel serves compressed static responses and the configuration makes unversioned HTML/CSS/JS revalidate. Assets have a short one-hour browser cache rather than an unsafe immutable cache on mutable filenames. Preview-server cache and compression findings must be rechecked on Vercel.
 
@@ -131,7 +142,9 @@ See `docs/seo-audit.md` for actual measured scores and testing limitations. Lab 
 
 ## Release and SEO readiness checklist
 
-- [x] Existing visual identity, project cards, and working interactions retained.
+- [x] Existing visual identity, card shells, diagrams, animations, and contact/navigation behavior retained.
+- [x] Exactly six approved projects; no repository inventory, count, or runtime GitHub requests.
+- [x] Editable research/patent configuration; only verified public links render.
 - [x] Verified name, specialization, internship, expected June 2028 graduation, and resume-backed research.
 - [x] One H1 and unique title/description per indexable page; self-referencing apex canonicals.
 - [x] Person/WebSite IDs connected; project SoftwareSourceCode markup supported by visible content.
@@ -141,12 +154,12 @@ See `docs/seo-audit.md` for actual measured scores and testing limitations. Lab 
 - [x] Resume PDF retained; email, GitHub, LinkedIn, and LeetCode references preserved.
 - [x] Accessible controls, reduced motion, pause option, custom noindex 404, public-only build.
 - [x] Local build, static regression checks, and server-response checks passed.
-- [ ] Complete remaining browser checks and repeat Lighthouse after the final small accessibility edits.
+- [ ] Complete desktop/tablet/mobile browser checks when local-page access is available; saved browser permissions currently block visual testing.
 - [ ] Deploy the reviewed output to the existing Vercel project.
 - [ ] Reverse the dashboard domain redirect; verify DNS, both TLS certificates, redirect paths, and real HTTP 404s.
 - [ ] Verify the live sitemap/robots/PDF/PNG, canonical tags, social previews, and hosted schema validation.
 - [ ] Verify Search Console ownership, submit sitemap, inspect canonical selection, and monitor indexing/performance.
-- [ ] Restore unavailable project source/demo links if their public destinations return.
+- [ ] Add HealtHub’s official public record and patent details only when confirmed; verify any deployment link before adding it.
 
 ## Resume privacy
 
