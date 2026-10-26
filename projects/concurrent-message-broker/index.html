@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0b1110" />
+  <title>Concurrent Message Broker | Sumit Kushwaha</title>
+  <meta name="description" content="A Kafka-inspired Java message broker exploring partition ordering, bounded concurrency, durable logs, crash recovery, and replayable consumers." />
+  <link rel="canonical" href="https://sumit-kushwaha.dev/projects/concurrent-message-broker/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Sumit Kushwaha | Portfolio" />
+  <meta property="og:title" content="Concurrent Message Broker | Sumit Kushwaha" />
+  <meta property="og:description" content="A Kafka-inspired Java message broker exploring partition ordering, bounded concurrency, durable logs, crash recovery, and replayable consumers." />
+  <meta property="og:url" content="https://sumit-kushwaha.dev/projects/concurrent-message-broker/" />
+  <meta property="og:image" content="https://sumit-kushwaha.dev/assets/og-cover.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Sumit Kushwaha — Java backend developer, distributed systems and AI engineering" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Concurrent Message Broker | Sumit Kushwaha" />
+  <meta name="twitter:description" content="A Kafka-inspired Java message broker exploring partition ordering, bounded concurrency, durable logs, crash recovery, and replayable consumers." />
+  <meta name="twitter:image" content="https://sumit-kushwaha.dev/assets/og-cover.png" />
+  <meta name="twitter:image:alt" content="Sumit Kushwaha — Java backend developer, distributed systems and AI engineering" />
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+  <link rel="stylesheet" href="/styles.css?v=2" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Person","@id":"https://sumit-kushwaha.dev/#person","name":"Sumit Kushwaha","url":"https://sumit-kushwaha.dev/"},{"@type":"SoftwareSourceCode","@id":"https://sumit-kushwaha.dev/projects/concurrent-message-broker/#source","name":"Concurrent Message Broker","url":"https://sumit-kushwaha.dev/projects/concurrent-message-broker/","description":"A Kafka-inspired Java message broker exploring partition ordering, bounded concurrency, durable logs, crash recovery, and replayable consumers.","codeRepository":"https://github.com/Sumit4374/Concurrent-Message-Broker","programmingLanguage":"Java","author":{"@id":"https://sumit-kushwaha.dev/#person"}}]}</script>
+</head>
+<body class="detail-page">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="topline" aria-hidden="true"></div>
+  <header class="site-header"><nav class="container detail-nav" aria-label="Main navigation"><a class="brand" href="/">SUMIT KUSHWAHA<span class="dot">.</span></a><a href="/#work">All projects ↗</a><a href="/#contact">Contact</a></nav></header>
+  <main id="main" class="container project-detail" tabindex="-1">
+    <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Portfolio</a><span aria-hidden="true"> / </span><a href="/#work">Projects</a><span aria-hidden="true"> / </span><span aria-current="page">Concurrent Message Broker</span></nav>
+    <p class="kicker">ENGINEERING NOTES / Java · TCP · Concurrency</p>
+    <h1>Concurrent Message Broker<span class="dot">.</span></h1>
+    <p class="detail-intro">A Kafka-inspired Java message broker exploring partition ordering, bounded concurrency, durable logs, crash recovery, and replayable consumers.</p>
+    <p class="detail-byline">Built by <a href="/#about">Sumit Kushwaha</a> · Java Backend Developer · Pune, India</p>
+    <div class="detail-actions"><a class="button button-primary" href="https://github.com/Sumit4374/Concurrent-Message-Broker" target="_blank" rel="noopener noreferrer">VIEW SOURCE ON GITHUB ↗</a><a class="button button-ghost" href="/assets/Sumit_Kushwaha_Resume.pdf" download="Sumit_Kushwaha_Resume.pdf">DOWNLOAD RESUME ↓</a></div>
+    <section aria-labelledby="section-0"><h2 id="section-0">Why build a message broker?</h2><p>Concurrent Message Broker is Sumit Kushwaha’s framework-free Java project exploring what happens between a producer sending an event and a consumer reading it later. The engineering problem is to preserve a clear ordering boundary, recover stored records after a restart, and keep concurrent work bounded when callers send faster than the broker can process.</p><p>The core separates producers and consumers from topic management, storage, and TCP networking. Java clients can use the broker API directly; remote clients enter through a binary TCP request/response protocol. Both paths converge on the same broker logic.</p></section>
+<section aria-labelledby="section-1"><h2 id="section-1">Architecture and request flow</h2><ol><li><strong>Produce:</strong> a producer submits a record through an asynchronous CompletableFuture API. A bounded executor queues work, with caller-runs backpressure when the queue fills.</li><li><strong>Route:</strong> round-robin or key-based partitioning chooses a topic partition. A partition write lock protects offset allocation and record insertion; independent partitions can progress concurrently.</li><li><strong>Persist:</strong> durable mode appends framed records through FileChannel before exposing them in memory. Log segments roll at a configured size, and a sparse offset index supports seeking within stored records.</li><li><strong>Consume:</strong> consumers fetch using a topic, partition, and offset. Per-group next-offset commits, with an optional offset journal, let separate groups progress independently and replay earlier records.</li></ol></section>
+<section aria-labelledby="section-2"><h2 id="section-2">Correctness under concurrency and failure</h2><p>Ordering is partition-local. A broker-wide message ID identifies a generated record, while the partition offset identifies its position in a particular stream. Keeping these concepts separate avoids implying a total order across every topic and partition.</p><p>The binary codec checks lengths, protocol fields, and CRC32 values. Startup scans log segments, rebuilds sparse indexes, and truncates an incomplete or corrupt tail to the last valid record boundary. TCP framing adds request correlation IDs and validation of malformed inputs.</p><p>The implementation uses immutable record data and defensive byte-array copies to prevent callers from mutating a payload while another thread stores or consumes it. Bounded producer and network worker pools make overload visible rather than allowing unlimited queued work.</p></section>
+<section aria-labelledby="section-3"><h2 id="section-3">Verification and trade-offs</h2><p>The repository documents JUnit 5 coverage for concurrent publishing, persistence and restart recovery, consumer offsets, malformed frames, and TCP integration. These tests examine correctness boundaries rather than establishing a performance benchmark.</p><p>This is an educational systems project. Coordination utilities explore heartbeats and leader epochs, but there is no integrated replicated log or production consensus protocol. Consumer coordination is in-process, and durable offsets use a local journal. It is not a production-ready replacement for Apache Kafka.</p></section>
+    <aside class="related-projects" aria-labelledby="related-heading"><h2 id="related-heading">Explore more engineering work</h2><a href="/projects/flashscale/">FlashScale</a><a href="/projects/ai-engineering-agent-platform/">AI Engineering Agent Platform</a></aside>
+  </main>
+  <footer class="footer"><div class="container footer-inner"><a href="/">Sumit Kushwaha · Portfolio</a><a href="mailto:kusumit437@gmail.com">kusumit437@gmail.com</a></div></footer>
+</body>
+</html>

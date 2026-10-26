@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0b1110" />
+  <title>FlashScale | Sumit Kushwaha</title>
+  <meta name="description" content="A Spring Boot caching and rate-limiting project with Redis stampede protection, Nginx application replicas, PostgreSQL, and Prometheus/Grafana observability." />
+  <link rel="canonical" href="https://sumit-kushwaha.dev/projects/flashscale/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Sumit Kushwaha | Portfolio" />
+  <meta property="og:title" content="FlashScale | Sumit Kushwaha" />
+  <meta property="og:description" content="A Spring Boot caching and rate-limiting project with Redis stampede protection, Nginx application replicas, PostgreSQL, and Prometheus/Grafana observability." />
+  <meta property="og:url" content="https://sumit-kushwaha.dev/projects/flashscale/" />
+  <meta property="og:image" content="https://sumit-kushwaha.dev/assets/og-cover.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Sumit Kushwaha — Java backend developer, distributed systems and AI engineering" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="FlashScale | Sumit Kushwaha" />
+  <meta name="twitter:description" content="A Spring Boot caching and rate-limiting project with Redis stampede protection, Nginx application replicas, PostgreSQL, and Prometheus/Grafana observability." />
+  <meta name="twitter:image" content="https://sumit-kushwaha.dev/assets/og-cover.png" />
+  <meta name="twitter:image:alt" content="Sumit Kushwaha — Java backend developer, distributed systems and AI engineering" />
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+  <link rel="stylesheet" href="/styles.css?v=2" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Person","@id":"https://sumit-kushwaha.dev/#person","name":"Sumit Kushwaha","url":"https://sumit-kushwaha.dev/"},{"@type":"SoftwareSourceCode","@id":"https://sumit-kushwaha.dev/projects/flashscale/#source","name":"FlashScale","url":"https://sumit-kushwaha.dev/projects/flashscale/","description":"A Spring Boot caching and rate-limiting project with Redis stampede protection, Nginx application replicas, PostgreSQL, and Prometheus/Grafana observability.","codeRepository":"https://github.com/Sumit4374/FlashScale","programmingLanguage":"Java","author":{"@id":"https://sumit-kushwaha.dev/#person"}}]}</script>
+</head>
+<body class="detail-page">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="topline" aria-hidden="true"></div>
+  <header class="site-header"><nav class="container detail-nav" aria-label="Main navigation"><a class="brand" href="/">SUMIT KUSHWAHA<span class="dot">.</span></a><a href="/#work">All projects ↗</a><a href="/#contact">Contact</a></nav></header>
+  <main id="main" class="container project-detail" tabindex="-1">
+    <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Portfolio</a><span aria-hidden="true"> / </span><a href="/#work">Projects</a><span aria-hidden="true"> / </span><span aria-current="page">FlashScale</span></nav>
+    <p class="kicker">ENGINEERING NOTES / Spring Boot · Redis · PostgreSQL</p>
+    <h1>FlashScale<span class="dot">.</span></h1>
+    <p class="detail-intro">A Spring Boot caching and rate-limiting project with Redis stampede protection, Nginx application replicas, PostgreSQL, and Prometheus/Grafana observability.</p>
+    <p class="detail-byline">Built by <a href="/#about">Sumit Kushwaha</a> · Java Backend Developer · Pune, India</p>
+    <div class="detail-actions"><a class="button button-primary" href="https://github.com/Sumit4374/FlashScale" target="_blank" rel="noopener noreferrer">VIEW SOURCE ON GITHUB ↗</a><a class="button button-ghost" href="/assets/Sumit_Kushwaha_Resume.pdf" download="Sumit_Kushwaha_Resume.pdf">DOWNLOAD RESUME ↓</a></div>
+    <section aria-labelledby="section-0"><h2 id="section-0">The problem: concurrent cache misses</h2><p>FlashScale is Sumit Kushwaha’s local Spring Boot demonstration of distributed caching and shared rate limiting. When several application replicas miss the same cache key at once, all of them can query the database for identical work. The project makes the coordination behind cache-stampede protection visible and measurable.</p><p>Three Spring Boot application replicas run behind Nginx in Docker Compose. They share Redis for cached product data, coordination, and rate-limit state, with PostgreSQL as the source of truth. Prometheus scrapes the replicas and Grafana presents the resulting metrics.</p></section>
+<section aria-labelledby="section-1"><h2 id="section-1">Architecture and the cache-aside path</h2><ol><li><strong>Look up:</strong> a product request checks Redis first. A cached value can be returned without reading PostgreSQL.</li><li><strong>Coordinate:</strong> a miss attempts a per-product Redis SET NX lock with an ownership token and expiry. The winner checks the cache again before querying the database.</li><li><strong>Populate:</strong> the lock holder reads PostgreSQL, caches the product with a TTL, and releases its lock through a Lua script that checks ownership.</li><li><strong>Wait:</strong> callers that lose the lock poll the cache for a bounded period. They do not use JVM-local synchronization, so the coordination spans all application replicas.</li></ol><p>Lock cleanup runs in a finally block on database failure. Missing products return 404, and Redis or PostgreSQL data-access failures return 503 instead of leaving callers waiting indefinitely.</p></section>
+<section aria-labelledby="section-2"><h2 id="section-2">Shared rate limiting and observability</h2><p>A Redis-backed fixed-window limiter applies to product reads across replicas. Rejected requests receive HTTP 429 and Retry-After. The limiter deliberately fails open when Redis is unavailable; product cache operations can still report a dependency failure. This separates the limiter’s availability decision from the data path’s ability to serve a product.</p><p>Metrics distinguish initial cache hits and misses from lock acquisition, lock failures, waits, and database reads. Grafana correlates these counters with HTTP latency and JVM memory. Replica-local counters must be aggregated across instances when examining system behavior.</p><p>The repository includes k6 scenarios for hot-cache reads, stampedes, bursts, and rate limiting. It records no reproducible throughput or latency benchmark yet, so this portfolio makes no capacity claim.</p></section>
+<section aria-labelledby="section-3"><h2 id="section-3">Engineering trade-offs</h2><p>Fixed windows can allow bursts at a window boundary. Cache waiters briefly occupy servlet threads, and a lock TTL can expire during an unusually slow database query. The project documents these limitations rather than treating a distributed lock as an unlimited correctness guarantee.</p><p>Unit tests cover cache hits, population after misses, the lock winner’s double-check, bounded waits, and lock release after failures. Docker Compose provides the integration environment. Future work documented in the repository includes authenticated administration, jittered waits, lock renewal or fencing where needed, and reproducible benchmark results.</p></section>
+    <aside class="related-projects" aria-labelledby="related-heading"><h2 id="related-heading">Explore more engineering work</h2><a href="/projects/concurrent-message-broker/">Concurrent Message Broker</a><a href="/projects/ai-engineering-agent-platform/">AI Engineering Agent Platform</a></aside>
+  </main>
+  <footer class="footer"><div class="container footer-inner"><a href="/">Sumit Kushwaha · Portfolio</a><a href="mailto:kusumit437@gmail.com">kusumit437@gmail.com</a></div></footer>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0b1110" />
+  <title>AI Engineering Agent Platform | Sumit Kushwaha</title>
+  <meta name="description" content="A Java and Spring Boot AI platform combining RAG, MCP tools, agent orchestration, JWT security, PostgreSQL/pgvector, Kafka, streaming, and automated testing." />
+  <link rel="canonical" href="https://sumit-kushwaha.dev/projects/ai-engineering-agent-platform/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Sumit Kushwaha | Portfolio" />
+  <meta property="og:title" content="AI Engineering Agent Platform | Sumit Kushwaha" />
+  <meta property="og:description" content="A Java and Spring Boot AI platform combining RAG, MCP tools, agent orchestration, JWT security, PostgreSQL/pgvector, Kafka, streaming, and automated testing." />
+  <meta property="og:url" content="https://sumit-kushwaha.dev/projects/ai-engineering-agent-platform/" />
+  <meta property="og:image" content="https://sumit-kushwaha.dev/assets/og-cover.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Sumit Kushwaha — Java backend developer, distributed systems and AI engineering" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="AI Engineering Agent Platform | Sumit Kushwaha" />
+  <meta name="twitter:description" content="A Java and Spring Boot AI platform combining RAG, MCP tools, agent orchestration, JWT security, PostgreSQL/pgvector, Kafka, streaming, and automated testing." />
+  <meta name="twitter:image" content="https://sumit-kushwaha.dev/assets/og-cover.png" />
+  <meta name="twitter:image:alt" content="Sumit Kushwaha — Java backend developer, distributed systems and AI engineering" />
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+  <link rel="stylesheet" href="/styles.css?v=2" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Person","@id":"https://sumit-kushwaha.dev/#person","name":"Sumit Kushwaha","url":"https://sumit-kushwaha.dev/"},{"@type":"SoftwareSourceCode","@id":"https://sumit-kushwaha.dev/projects/ai-engineering-agent-platform/#source","name":"AI Engineering Agent Platform","url":"https://sumit-kushwaha.dev/projects/ai-engineering-agent-platform/","description":"A Java and Spring Boot AI platform combining RAG, MCP tools, agent orchestration, JWT security, PostgreSQL/pgvector, Kafka, streaming, and automated testing.","codeRepository":"https://github.com/Sumit4374/AI-Engineering-Agent-Platform","programmingLanguage":"Java","author":{"@id":"https://sumit-kushwaha.dev/#person"}}]}</script>
+</head>
+<body class="detail-page">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="topline" aria-hidden="true"></div>
+  <header class="site-header"><nav class="container detail-nav" aria-label="Main navigation"><a class="brand" href="/">SUMIT KUSHWAHA<span class="dot">.</span></a><a href="/#work">All projects ↗</a><a href="/#contact">Contact</a></nav></header>
+  <main id="main" class="container project-detail" tabindex="-1">
+    <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Portfolio</a><span aria-hidden="true"> / </span><a href="/#work">Projects</a><span aria-hidden="true"> / </span><span aria-current="page">AI Engineering Agent Platform</span></nav>
+    <p class="kicker">ENGINEERING NOTES / Spring AI · RAG · MCP</p>
+    <h1>AI Engineering Agent Platform<span class="dot">.</span></h1>
+    <p class="detail-intro">A Java and Spring Boot AI platform combining RAG, MCP tools, agent orchestration, JWT security, PostgreSQL/pgvector, Kafka, streaming, and automated testing.</p>
+    <p class="detail-byline">Built by <a href="/#about">Sumit Kushwaha</a> · Java Backend Developer · Pune, India</p>
+    <div class="detail-actions"><a class="button button-primary" href="https://github.com/Sumit4374/AI-Engineering-Agent-Platform" target="_blank" rel="noopener noreferrer">VIEW SOURCE ON GITHUB ↗</a><a class="button button-ghost" href="/assets/Sumit_Kushwaha_Resume.pdf" download="Sumit_Kushwaha_Resume.pdf">DOWNLOAD RESUME ↓</a></div>
+    <section aria-labelledby="section-0"><h2 id="section-0">Connecting AI features to backend engineering</h2><p>AI Engineering Agent Platform is Sumit Kushwaha’s Java and Spring Boot project for LLM chat, retrieval-augmented generation, agents, and multi-step tool execution. Its scope combines AI workflows with the backend concerns that make those workflows inspectable: authentication, execution tracing, streaming, cancellation, and failure-path testing.</p><p>The platform uses Spring AI, PostgreSQL/pgvector, Kafka, and server-sent events. The platform brings ingestion, retrieval, and agent execution into a Java service architecture. Its scope is a backend engineering project, with no claim of a public hosted service or measured production adoption.</p></section>
+<section aria-labelledby="section-1"><h2 id="section-1">Architecture: retrieval, tools, and execution</h2><dl><dt>REST APIs and security</dt><dd>Spring Boot REST APIs expose chat, retrieval, agent, MCP tool, and trace functionality. Spring Security and JWT provide the authentication layer.</dd><dt>Ingestion and retrieval</dt><dd>Document ingestion selects a text extractor, chunks the extracted content, generates embeddings in a batch, and stores document chunks for PostgreSQL/pgvector search. Retrieval embeds a query and searches for similar chunks within the requesting user’s scope before formatting context for the model.</dd><dt>Agent orchestration</dt><dd>Agent workflows coordinate multiple tool steps, including MCP tools. Cancellation and guardrails form part of the execution controls rather than being separate interface features.</dd><dt>Events and streaming</dt><dd>Kafka and server-sent events are integrated into the platform. The ingestion consumer handles document-upload events, records processing status, stores embedded chunks, and publishes a completion event. Kafka listener startup is configurable, alongside an application-event listener.</dd></dl></section>
+<section aria-labelledby="section-2"><h2 id="section-2">Engineering challenges and quality</h2><p>Multi-step AI workflows bring more failure paths than a single request and response: retrieval can return insufficient context, tool execution can fail, a caller can cancel a run, or an output stream can end before a workflow completes. The project’s emphasis on tracing, cancellation, guardrails, and automated tests reflects those engineering concerns.</p><p>The resume records 169+ automated tests spanning API, agent, and failure paths, plus Prometheus/Micrometer observability. The count is recorded in the resume; the portfolio audit did not execute the platform’s test suite. The portfolio does not extrapolate from it to claim a measured accuracy, latency, throughput, or security certification.</p></section>
+<section aria-labelledby="section-3"><h2 id="section-3">Scope and review notes</h2><p>The useful review questions are how authenticated requests enter the system, how retrieved context reaches an agent, how a tool call is traced, and how cancellation and failure are represented. These boundaries connect AI engineering to API design, event processing, and automated testing.</p><p>The source separates document ingestion from retrieval. A retrieval result retains source chunks alongside the generated answer, giving the caller more context than an answer string alone. This makes source attribution and retrieval behavior useful points for a code review. The repository also contains dedicated tests for ingestion, vector retrieval, agent execution, MCP services, and authentication.</p></section>
+    <aside class="related-projects" aria-labelledby="related-heading"><h2 id="related-heading">Explore more engineering work</h2><a href="/projects/concurrent-message-broker/">Concurrent Message Broker</a><a href="/projects/flashscale/">FlashScale</a></aside>
+  </main>
+  <footer class="footer"><div class="container footer-inner"><a href="/">Sumit Kushwaha · Portfolio</a><a href="mailto:kusumit437@gmail.com">kusumit437@gmail.com</a></div></footer>
+</body>
+</html>

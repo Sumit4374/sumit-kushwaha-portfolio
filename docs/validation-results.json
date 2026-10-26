@@ -1,0 +1,279 @@
+{
+  "date": "2026-10-26",
+  "scope": "Local production output; no deployment, DNS change, remote configuration change, or Search Console action",
+  "lighthouse": {
+    "mobile": {
+      "version": "13.5.0",
+      "url": "http://127.0.0.1:8001/",
+      "scores": {
+        "performance": 100,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "metrics": {
+        "largest-contentful-paint": "1.4\u00a0s",
+        "cumulative-layout-shift": "0",
+        "total-blocking-time": "0\u00a0ms"
+      },
+      "note": "Measured before final logo-label and desktop navigation-contrast fixes; no browser rerun after access was declined."
+    },
+    "desktop": {
+      "version": "13.5.0",
+      "url": "http://127.0.0.1:8001/",
+      "scores": {
+        "performance": 100,
+        "accessibility": 96,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "metrics": {
+        "largest-contentful-paint": "0.3\u00a0s",
+        "cumulative-layout-shift": "0",
+        "total-blocking-time": "0\u00a0ms"
+      },
+      "note": "Measured before final logo-label and desktop navigation-contrast fixes; no browser rerun after access was declined."
+    }
+  },
+  "checks": {
+    "build": "passed",
+    "static_regression_checks": "passed",
+    "server_html_assets_and_custom_404": "passed before final logo-label and navigation-color edits",
+    "schema_vocabulary": "9 entities across 4 pages passed official Schema.org type/property-domain and typed-object-range checks; JSON/reference checks also passed",
+    "hosted_schema_validator": "not run",
+    "browser_interactions": "menu, Escape focus, archive search, filters, empty results, pause control, and project navigation passed before browser access was declined",
+    "browser_console": "no warnings or errors in captured homepage logs",
+    "resume": "PDF signature and HTTP 200/application-pdf passed; browser download attempt was canceled",
+    "responsive": "390px homepage visually reviewed; 320px homepage layout width checked without document overflow; project navigation at 320px passed, further visual checks declined",
+    "remaining_browser_checks": "post-fix Lighthouse, 768px/tablet layout, further project-page screenshots, reduced-motion emulation, and completed browser download"
+  },
+  "external_links": [
+    {
+      "url": "http://sumit-kushwaha.dev/",
+      "error": "HTTPSConnectionPool(host='www.sumit-kushwaha.dev', port=443): Max retries exceeded with url: / (Caused by NameResolutionError(\"HTTPSConnection(host='www.sumit-kushwaha.dev', port=443): Failed to resolve 'www.sumit-kushwaha.dev' ([Errno -2] Name or service not known)\"))"
+    },
+    {
+      "url": "http://www.sumit-kushwaha.dev/",
+      "error": "HTTPConnectionPool(host='www.sumit-kushwaha.dev', port=80): Max retries exceeded with url: / (Caused by NameResolutionError(\"HTTPConnection(host='www.sumit-kushwaha.dev', port=80): Failed to resolve 'www.sumit-kushwaha.dev' ([Errno -2] Name or service not known)\"))"
+    },
+    {
+      "url": "https://ecommerce-sooty-three-51.vercel.app",
+      "status": 404,
+      "final": "https://ecommerce-sooty-three-51.vercel.app/",
+      "redirects": [],
+      "server": "Vercel"
+    },
+    {
+      "url": "https://github.com/Sumit4374",
+      "status": 200,
+      "final": "https://github.com/Sumit4374",
+      "redirects": [],
+      "server": "github.com"
+    },
+    {
+      "url": "https://github.com/Sumit4374/AI-Engineering-Agent-Platform",
+      "status": 200,
+      "final": "https://github.com/Sumit4374/AI-Engineering-Agent-Platform",
+      "redirects": [],
+      "server": "github.com"
+    },
+    {
+      "url": "https://github.com/Sumit4374/AegisAiBank",
+      "status": 404,
+      "final": "https://github.com/Sumit4374/AegisAiBank",
+      "redirects": [],
+      "server": "github.com"
+    },
+    {
+      "url": "https://github.com/Sumit4374/ChatApplication",
+      "status": 200,
+      "final": "https://github.com/Sumit4374/ChatApplication",
+      "redirects": [],
+      "server": "github.com"
+    },
+    {
+      "url": "https://github.com/Sumit4374/Concurrent-Message-Broker",
+      "status": 200,
+      "final": "https://github.com/Sumit4374/Concurrent-Message-Broker",
+      "redirects": [],
+      "server": "github.com"
+    },
+    {
+      "url": "https://github.com/Sumit4374/Context_MCP",
+      "status": 200,
+      "final": "https://github.com/Sumit4374/Context_MCP",
+      "redirects": [],
+      "server": "github.com"
+    },
+    {
+      "url": "https://github.com/Sumit4374/DSAA_CP",
+      "status": 404,
+      "final": "https://github.com/Sumit4374/DSAA_CP",
+      "redirects": [],
+      "server": "github.com"
+    },
+    {
+      "url": "https://github.com/Sumit4374/DSAA_Project",
+      "status": 404,
+      "final": "https://github.com/Sumit4374/DSAA_Project",
+      "redirects": [],
+      "server": "github.com"
+    },
+    {
+      "url": "https://github.com/Sumit4374/E-Commerce",
+      "status": 200,
+      "final": "https://github.com/Sumit4374/E-Commerce",
+      "redirects": [],
+      "server": "github.com"
+    },
+    {
+      "url": "https://github.com/Sumit4374/E-Commerce_Order_Management",
+      "status": 404,
+      "final": "https://github.com/Sumit4374/E-Commerce_Order_Management",
+      "redirects": [],
+      "server": "github.com"
+    },
+    {
+      "url": "https://github.com/Sumit4374/EDI_PROJECT_2ndYear",
+      "status": 200,
+      "final": "https://github.com/Sumit4374/EDI_PROJECT_2ndYear",
+      "redirects": [],
+      "server": "github.com"
+    },
+    {
+      "url": "https://github.com/Sumit4374/Employee_CRUD_Project",
+      "status": 200,
+      "final": "https://github.com/Sumit4374/Employee_CRUD_Project",
+      "redirects": [],
+      "server": "github.com"
+    },
+    {
+      "url": "https://github.com/Sumit4374/FlashScale",
+      "status": 200,
+      "final": "https://github.com/Sumit4374/FlashScale",
+      "redirects": [],
+      "server": "github.com"
+    },
+    {
+      "url": "https://github.com/Sumit4374/GetSocial--MicroServices-",
+      "status": 200,
+      "final": "https://github.com/Sumit4374/GetSocial--MicroServices-",
+      "redirects": [],
+      "server": "github.com"
+    },
+    {
+      "url": "https://github.com/Sumit4374/HealthcareAlly",
+      "status": 200,
+      "final": "https://github.com/Sumit4374/HealthcareAlly",
+      "redirects": [],
+      "server": "github.com"
+    },
+    {
+      "url": "https://github.com/Sumit4374/MiniSearchEngine",
+      "status": 200,
+      "final": "https://github.com/Sumit4374/MiniSearchEngine",
+      "redirects": [],
+      "server": "github.com"
+    },
+    {
+      "url": "https://github.com/Sumit4374/MyTasks",
+      "status": 404,
+      "final": "https://github.com/Sumit4374/MyTasks",
+      "redirects": [],
+      "server": "github.com"
+    },
+    {
+      "url": "https://github.com/Sumit4374/SecureNet-and-NIDS",
+      "status": 200,
+      "final": "https://github.com/Sumit4374/SecureNet-and-NIDS",
+      "redirects": [],
+      "server": "github.com"
+    },
+    {
+      "url": "https://github.com/Sumit4374/Smart_Campus_Facility",
+      "status": 404,
+      "final": "https://github.com/Sumit4374/Smart_Campus_Facility",
+      "redirects": [],
+      "server": "github.com"
+    },
+    {
+      "url": "https://github.com/Sumit4374/StudentClassifier",
+      "status": 404,
+      "final": "https://github.com/Sumit4374/StudentClassifier",
+      "redirects": [],
+      "server": "github.com"
+    },
+    {
+      "url": "https://github.com/Sumit4374/Sumit4374",
+      "status": 200,
+      "final": "https://github.com/Sumit4374/Sumit4374",
+      "redirects": [],
+      "server": "github.com"
+    },
+    {
+      "url": "https://github.com/Sumit4374/TaskManager",
+      "status": 404,
+      "final": "https://github.com/Sumit4374/TaskManager",
+      "redirects": [],
+      "server": "github.com"
+    },
+    {
+      "url": "https://github.com/Sumit4374/WorkSpace",
+      "status": 404,
+      "final": "https://github.com/Sumit4374/WorkSpace",
+      "redirects": [],
+      "server": "github.com"
+    },
+    {
+      "url": "https://github.com/Sumit4374/github-final-project",
+      "status": 200,
+      "final": "https://github.com/Sumit4374/github-final-project",
+      "redirects": [],
+      "server": "github.com"
+    },
+    {
+      "url": "https://github.com/Sumit4374/mcino-Introduction-to-Git-and-GitHub",
+      "status": 200,
+      "final": "https://github.com/Sumit4374/mcino-Introduction-to-Git-and-GitHub",
+      "redirects": [],
+      "server": "github.com"
+    },
+    {
+      "url": "https://github.com/Sumit4374?tab=repositories",
+      "status": 200,
+      "final": "https://github.com/Sumit4374?tab=repositories",
+      "redirects": [],
+      "server": "github.com"
+    },
+    {
+      "url": "https://leetcode.com/u/SumitKush1323/",
+      "status": 403,
+      "final": "https://leetcode.com/u/SumitKush1323/",
+      "redirects": [],
+      "server": "cloudflare"
+    },
+    {
+      "url": "https://sumit-kushwaha.dev/",
+      "error": "HTTPSConnectionPool(host='www.sumit-kushwaha.dev', port=443): Max retries exceeded with url: / (Caused by NameResolutionError(\"HTTPSConnection(host='www.sumit-kushwaha.dev', port=443): Failed to resolve 'www.sumit-kushwaha.dev' ([Errno -2] Name or service not known)\"))"
+    },
+    {
+      "url": "https://sumit-kushwaha.dev/robots.txt",
+      "error": "HTTPSConnectionPool(host='www.sumit-kushwaha.dev', port=443): Max retries exceeded with url: /robots.txt (Caused by NameResolutionError(\"HTTPSConnection(host='www.sumit-kushwaha.dev', port=443): Failed to resolve 'www.sumit-kushwaha.dev' ([Errno -2] Name or service not known)\"))"
+    },
+    {
+      "url": "https://sumit-kushwaha.dev/sitemap.xml",
+      "error": "HTTPSConnectionPool(host='www.sumit-kushwaha.dev', port=443): Max retries exceeded with url: /sitemap.xml (Caused by NameResolutionError(\"HTTPSConnection(host='www.sumit-kushwaha.dev', port=443): Failed to resolve 'www.sumit-kushwaha.dev' ([Errno -2] Name or service not known)\"))"
+    },
+    {
+      "url": "https://www.linkedin.com/in/sumit-kushwaha-a97238331",
+      "status": 999,
+      "final": "https://www.linkedin.com/in/sumit-kushwaha-a97238331",
+      "redirects": [],
+      "server": "cloudflare"
+    },
+    {
+      "url": "https://www.sumit-kushwaha.dev/",
+      "error": "HTTPSConnectionPool(host='www.sumit-kushwaha.dev', port=443): Max retries exceeded with url: / (Caused by NameResolutionError(\"HTTPSConnection(host='www.sumit-kushwaha.dev', port=443): Failed to resolve 'www.sumit-kushwaha.dev' ([Errno -2] Name or service not known)\"))"
+    }
+  ]
+}
